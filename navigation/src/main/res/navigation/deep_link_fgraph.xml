@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/deep_link_fgraph"
+    app:startDestination="@id/pendingIntentFragment">
+
+    <fragment
+        android:id="@+id/pendingIntentFragment"
+        android:name="com.example.navigation.simple3.PendingIntentFragment"
+        android:label="fragment_pending_intent"
+        tools:layout="@layout/fragment_pending_intent" />
+    <fragment
+        android:id="@+id/detailFragment2"
+        android:name="com.example.navigation.simple3.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment2_to_pendingIntentFragment"
+            app:destination="@id/pendingIntentFragment" />
+        <deepLink app:uri="www.baidu.com/{params}"/>
+    </fragment>
+
+</navigation>

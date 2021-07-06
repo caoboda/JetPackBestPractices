@@ -1,0 +1,13 @@
+include ':workmanager'
+include ':paging'
+include ':livedata'
+include ':viewmodel'
+include ':lifecycle'
+include ':app'
+rootProject.name = "JetPackBestPractices"
+include ':databinding'
+include ':room'
+include ':navigation'
+include ':hilt'
+include ':dagger2'
+include ':rxjava'
