@@ -1,6 +1,5 @@
 package com.example.rxjava.source.map;
 
-import com.example.rxjava.source.create.Observable;
 import com.example.rxjava.source.create.ObservableSource;
 import com.example.rxjava.source.create.Observer;
 
