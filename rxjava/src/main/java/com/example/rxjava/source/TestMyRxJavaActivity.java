@@ -43,23 +43,28 @@ public class TestMyRxJavaActivity extends AppCompatActivity {
                 emitter.onError(new Throwable("抛个异常"));
 
             }
-        })/*.map(new Function<Object, Object>() {
-            @Override
-            public String apply(Object o) {
-                return "map类型转换后的" + o;
-            }
-        })*/
+        })
+                .subscribeOn(Schedulers.newThread())
                 .flatMap(new Function<Object, ObservableSource<Object>>() {
                     @Override
                     public ObservableSource<Object> apply(Object s) {
                         return Observable.create(new ObservableOnSubscribe<Object>() {
                             @Override
                             public void subscribe(Emitter<Object> emitter) {
-                                emitter.onNext("flatMap的处理过后再发送的 " + s + Thread.currentThread());
+                                Log.e(TAG, "flatMap subscribe " + Thread.currentThread());
+                                emitter.onNext(s);
                             }
                         });
                     }
-                }).subscribeOn(Schedulers.newThread())
+                })
+                .observerOn(Schedulers.mainThread())
+                .map(new Function<Object, Object>() {
+                    @Override
+                    public String apply(Object o) {
+                        Log.e(TAG, "map apply " + Thread.currentThread());
+                        return "map类型转换后的" + o;
+                    }
+                })
                 .subscribe(new Observer() {
                     @Override
                     public void onSubscribe() {
@@ -68,7 +73,7 @@ public class TestMyRxJavaActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(Object o) {
-                        Log.e(TAG, "onNext " + o + Thread.currentThread());
+                        Log.e(TAG, "onNext " + o +" "+ Thread.currentThread());
                     }
 
                     @Override

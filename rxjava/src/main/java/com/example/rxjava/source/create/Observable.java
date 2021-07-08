@@ -3,6 +3,7 @@ package com.example.rxjava.source.create;
 import com.example.rxjava.source.map.Function;
 import com.example.rxjava.source.map.ObservableFlatMap;
 import com.example.rxjava.source.map.ObservableMap;
+import com.example.rxjava.source.scheduler.ObserableObserverOn;
 import com.example.rxjava.source.scheduler.ObservableSubscribeOn;
 import com.example.rxjava.source.scheduler.Scheduler;
 
@@ -43,5 +44,11 @@ public abstract class Observable<T> implements ObservableSource<T>{
     //这里不是静态方法，是基于当前的被观察者来调用
     public  ObservableSubscribeOn<T> subscribeOn(Scheduler scheduler){
         return  new ObservableSubscribeOn<>(this,scheduler);
+    }
+
+    //创建observerOn操作符
+    //这里不是静态方法，是基于当前的被观察者来调用
+    public ObserableObserverOn<T> observerOn(Scheduler scheduler){
+        return  new ObserableObserverOn<>(this,scheduler);
     }
 }
